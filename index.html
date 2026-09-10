@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RoadGuardian</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            🚗 RoadGuardian
+        </div>
+
+        <div class="nav-links">
+    <span onclick="showPage('dashboardPage')">Dashboard</span>
+    <span onclick="showPage('liveMapPage')">Live Map</span>
+    <span onclick="document.querySelector('.emergency-section').scrollIntoView({behavior: 'smooth'})">Emergency</span>
+</div>
+    </nav>
+    
+
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- DASHBOARD PAGE -->
+<div id="dashboardPage" class="page-section">
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+            <h1>Road Safety Dashboard</h1>
+
+            <p>
+                A Living, Intelligent Road-Safety Network
+            </p>
+
+        </section>
+        <!-- ===============================
+     PHASE 11 - AUTHORITY DASHBOARD
+     =============================== -->
+
+<section class="authority-section">
+
+    <h2>👮 Authority Dashboard</h2>
+
+    <p>
+        RoadGuardian incident and road-condition monitoring
+    </p>
+
+    <div class="authority-cards">
+
+        <div class="authority-card">
+    <h3>🚨 Active Emergencies</h3>
+
+    <div class="authority-number" id="activeEmergencyCount">
+        0
+    </div>
+
+    <p>Emergency incidents requiring attention</p>
+</div>
+
+        <div class="authority-card">
+            <h3>🚧 Active Hazards</h3>
+            <div class="authority-number">
+                9
+            </div>
+            <p>Road hazards currently monitored</p>
+        </div>
+
+        <div class="authority-card">
+            <h3>🔧 Repair Requests</h3>
+            <div class="authority-number">
+                1
+            </div>
+            <p>Hazards reported for repair</p>
+        </div>
+
+    </div>
+    <div class="incident-table-container">
+
+        <h3>🚨 Emergency Incidents</h3>
+
+        <table class="incident-table">
+
+            <thead>
+                <tr>
+                    <th>Incident ID</th>
+                    <th>Vehicle</th>
+                    <th>Severity</th>
+                    <th>Priority</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>INC-0001</td>
+                    <td>V-001</td>
+                    <td>Critical</td>
+                    <td>HIGH</td>
+                    <td>
+    17.3550, 78.4750
+    <br>
+    <button onclick="focusOnIncident()">
+        🗺️ View on Map
+    </button>
+</td>
+                    <td id="incidentStatus">⚪ No Active Incident</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+<!-- ===============================
+     PHASE 12 - AI ROAD INTELLIGENCE
+     =============================== -->
+
+<section class="ai-section">
+    <!-- ===============================
+     PHASE 13 - INNOVATION HIGHLIGHT
+     =============================== -->
+
+<section class="innovation-section">
+
+    <h2>💡 Why RoadGuardian?</h2>
+
+    <p>
+        Every vehicle becomes a moving sensor,
+        every road becomes a living dataset,
+        and every journey makes the road-safety map smarter.
+    </p>
+
+    <div class="innovation-points">
+
+        <div>
+            <h3>🗺️ Living Road Map</h3>
+            <p>
+                Road conditions are continuously updated
+                using observations from vehicles.
+            </p>
+        </div>
+
+        <div>
+            <h3>🧬 Hazard DNA</h3>
+            <p>
+                Each hazard can have its own history,
+                verification and repair status.
+            </p>
+        </div>
+
+        <div>
+            <h3>🤖 Predictive Intelligence</h3>
+            <p>
+                RoadGuardian combines multiple factors
+                to estimate future road risk.
+            </p>
+        </div>
+
+        <div>
+            <h3>🚨 Emergency Response</h3>
+            <p>
+                Serious incidents can trigger a structured
+                emergency-response workflow.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+    <h2>🧠 AI Road Intelligence</h2>
+
+    <p>
+        AI-powered analysis of road conditions,
+        hazards and vehicle observations
+    </p>
+
+    <div id="aiStatus">
+    🤖 AI STATUS: ANALYZING
+</div>
+    <div id="aiInsight">
+
+        <strong>🤖 AI Analysis</strong>
+
+        <p>
+            RoadGuardian is analyzing current road data...
+        </p>
+
+    </div>
+    <div class="ai-inputs">
+
+    <p>🚗 Vehicle Observations: <b id="aiVehicles">24</b></p>
+
+    <p>🚧 Active Hazards: <b id="aiHazards">9</b></p>
+
+    <p>⚠️ Risk Prediction: <b id="aiRisk">99%</b></p>
+
+    <p>🌙 Night Condition: <b id="aiNight">Yes</b></p>
+
+    <p>🌧️ Weather Risk: <b id="aiWeather">10%</b></p>
+
+</div>
+
+</section>
+
+<section class="traffic-section">
+
+    <h2>🚦 Traffic Intelligence</h2>
+    <p>AI-powered vehicle detection, classification and congestion analysis</p>
+
+    <div class="traffic-status" id="trafficStatus">
+        🟢 TRAFFIC AI: ANALYZING
+    </div>
+
+    <div class="traffic-cards">
+
+        <div class="traffic-card">
+            <h3>🚗 Vehicles Detected</h3>
+            <div class="traffic-number" id="vehicleCount">47</div>
+            <p>Current road observation</p>
+        </div>
+
+        <div class="traffic-card">
+            <h3>🚦 Traffic Density</h3>
+            <div class="traffic-number" id="trafficDensity">High</div>
+            <p>Based on vehicle concentration</p>
+        </div>
+
+        <div class="traffic-card">
+            <h3>🔴 Bottleneck</h3>
+            <div class="traffic-number" id="bottleneckStatus">Detected</div>
+            <p>Traffic slowdown identified</p>
+        </div>
+
+    </div>
+
+    <div class="vehicle-types">
+
+        <h3>🚘 Vehicle Classification</h3>
+
+        <p>🚗 Cars: <b>24</b></p>
+        <p>🏍️ Bikes: <b>12</b></p>
+        <p>🚌 Buses: <b>4</b></p>
+        <p>🚚 Trucks: <b>5</b></p>
+        <p>🛺 Autos: <b>2</b></p>
+
+    </div>
+
+    <div class="congestion-box">
+
+        <h3>🔥 Congestion Analysis</h3>
+
+        <p>
+            AI detected a high-traffic section on the monitored route.
+        </p>
+
+        <p>
+            📍 <b>Location:</b> Hyderabad Urban Route
+        </p>
+
+        <p>
+            🚦 <b>Traffic Level:</b> HIGH
+        </p>
+
+        <p>
+            ⏱️ <b>Estimated Delay:</b> +13 minutes
+        </p>
+
+    </div>
+
+</section>
+<!-- ===============================
+     PHASE 16 - INFRASTRUCTURE INTELLIGENCE
+     =============================== -->
+<section class="infrastructure-section">
+
+    <h2>🏗️ Infrastructure Intelligence</h2>
+
+    <p>
+        Bus-mounted cameras continuously monitor
+        road infrastructure and identify possible deficiencies.
+    </p>
+
+    <div class="infrastructure-cards">
+
+        <div class="infrastructure-card">
+            <h3>🚧 Road Divider</h3>
+            <p><b>🔴 Missing</b></p>
+            <small>AI camera observation</small>
+        </div>
+
+        <div class="infrastructure-card">
+            <h3>🚸 Zebra Crossing</h3>
+            <p><b>🟠 Faded / Missing</b></p>
+            <small>AI camera observation</small>
+        </div>
+
+        <div class="infrastructure-card">
+            <h3>🚦 Traffic Signboard</h3>
+            <p><b>🔴 Damaged</b></p>
+            <small>AI camera observation</small>
+        </div>
+
+        <div class="infrastructure-card">
+            <h3>🌊 Waterlogging</h3>
+            <p><b>🟠 Detected</b></p>
+            <small>AI camera observation</small>
+        </div>
+
+    </div>
+
+    <div class="infrastructure-alert">
+
+        <h3>⚠️ Infrastructure Alert</h3>
+
+        <p>
+            Multiple infrastructure deficiencies have been
+            identified along the monitored bus route.
+        </p>
+
+        <p>
+            📍 <b>Priority:</b> High
+        </p>
+
+        <p>
+            🔧 <b>Recommended Action:</b>
+            Inspect and repair the affected road section.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ===============================
+     PHASE 16 - PEDESTRIAN & INCIDENT INTELLIGENCE
+     =============================== -->
+
+<section class="incident-intelligence-section">
+
+    <h2>🚨 Pedestrian & Incident Intelligence</h2>
+
+    <p>
+        AI analyses bus camera observations to identify
+        vulnerable pedestrians and serious road incidents.
+    </p>
+
+    <div class="incident-cards">
+
+        <div class="incident-card">
+
+            <h3>👧 Vulnerable Pedestrian</h3>
+
+            <p><b>🟠 School Children Detected</b></p>
+
+            <small>
+                Camera: Front Camera
+            </small>
+
+            <p>
+                ⚠️ Increased pedestrian safety risk detected.
+            </p>
+
+        </div>
+
+        <div class="incident-card">
+
+            <h3>🏎️ Rash Driving</h3>
+
+            <p><b>🔴 High-Speed Behaviour Detected</b></p>
+
+            <small>
+                Camera: Front Camera
+            </small>
+
+            <p>
+                ⚠️ Vehicle movement requires investigation.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="hit-run-box">
+
+        <h3>🚨 Hit-and-Run / Incident Detection</h3>
+
+        <p>
+            RoadGuardian AI detected a suspected serious
+            road incident and tracked the involved vehicle.
+        </p>
+
+        <p>
+            🚗 <b>Vehicle:</b> V-001
+        </p>
+
+        <p>
+            🔢 <b>Registration Number:</b> TS-09-AB-1234
+        </p>
+
+        <p>
+            🎯 <b>Number Plate Confidence:</b> 94%
+        </p>
+
+        <p>
+            📍 <b>GPS:</b> 17.3550, 78.4750
+        </p>
+
+        <p>
+            🕒 <b>Timestamp:</b> Live Incident Record
+        </p>
+
+        <p>
+            📡 <b>Central Command:</b> Alert Ready
+        </p>
+
+        <div class="incident-status">
+            🔴 HIGH PRIORITY INCIDENT
+        </div>
+
+    </div>
+
+</section>
+<!-- ===============================
+     PHASE 17 - CENTRAL URBAN INTELLIGENCE
+     =============================== -->
+
+<section class="central-section">
+
+    <h2>🏙️ Central Urban Intelligence</h2>
+
+    <p>
+        Central platform aggregates intelligence received
+        from RoadGuardian buses and monitored road routes.
+    </p>
+
+    <div class="central-cards">
+
+        <div class="central-card">
+
+            <h3>🚌 Fleet Monitoring</h3>
+
+            <div class="central-number">24</div>
+
+            <p>
+                Buses / vehicles contributing road observations
+            </p>
+
+        </div>
+
+        <div class="central-card">
+
+            <h3>🚧 Road Events</h3>
+
+            <div class="central-number">9</div>
+
+            <p>
+                Active road hazards and infrastructure events
+            </p>
+
+        </div>
+
+        <div class="central-card">
+
+            <h3>🚦 Traffic Density</h3>
+
+            <div class="central-number">HIGH</div>
+
+            <p>
+                Current monitored traffic condition
+            </p>
+
+        </div>
+
+        <div class="central-card">
+
+            <h3>⏱️ Route Delay</h3>
+
+            <div class="central-number">+13 min</div>
+
+            <p>
+                Estimated delay on congested route
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="gis-box">
+
+        <h3>🗺️ GIS Event Intelligence</h3>
+
+        <p>
+            RoadGuardian aggregates hazard, traffic,
+            infrastructure and incident events on a
+            centralized geographic information platform.
+        </p>
+
+        <p>
+            🔴 <b>High-Risk Zones:</b> 4
+        </p>
+
+        <p>
+            🚧 <b>Infrastructure Deficiencies:</b> 4
+        </p>
+
+        <p>
+            🔥 <b>Congestion Hotspots:</b> 1
+        </p>
+
+    </div>
+
+    <div class="authority-insight-box">
+
+        <h3>💡 Actionable Authority Insights</h3>
+
+        <p>
+            🔧 Prioritize inspection and repair of
+            infrastructure-deficient road sections.
+        </p>
+
+        <p>
+            🚦 Monitor high-congestion routes and
+            optimize traffic management.
+        </p>
+
+        <p>
+            🚌 Use mobile bus observations to continuously
+            update road-condition information.
+        </p>
+
+        <p>
+            🚨 Prioritize serious incidents for
+            central-command response.
+        </p>
+
+    </div>
+
+</section>
+<!-- ===============================
+     PHASE 17 - EDGE AI & BANDWIDTH OPTIMIZATION
+     =============================== -->
+
+<section class="edge-section">
+
+    <h2>🤖 Edge-AI & Bandwidth Optimization</h2>
+
+    <p>
+        RoadGuardian processes camera intelligence
+        directly on the bus before sending important
+        events to the central platform.
+    </p>
+
+    <div class="edge-flow">
+
+        <div class="edge-step">
+            <h3>📹 1. Camera Streams</h3>
+            <p>
+                Front, rear, left, right and cabin cameras
+                continuously observe the surroundings.
+            </p>
+        </div>
+
+        <div class="edge-step">
+            <h3>🧠 2. Edge AI Processing</h3>
+            <p>
+                AI analyses video onboard to identify
+                hazards, vehicles, pedestrians and incidents.
+            </p>
+        </div>
+
+        <div class="edge-step">
+            <h3>📡 3. Intelligent Data Transfer</h3>
+            <p>
+                Only important events, alerts and
+                extracted intelligence are sent centrally.
+            </p>
+        </div>
+
+        <div class="edge-step">
+            <h3>🏙️ 4. Central Platform</h3>
+            <p>
+                The central system aggregates events
+                for monitoring, analytics and response.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="bandwidth-box">
+
+        <h3>📊 Data Transmission Status</h3>
+
+        <p>
+            🟢 <b>Raw Video:</b> Processed locally
+        </p>
+
+        <p>
+            🟢 <b>AI Events:</b> Sent to Central Platform
+        </p>
+
+        <p>
+            🟢 <b>GPS & Timestamp:</b> Included with events
+        </p>
+
+        <p>
+            🟢 <b>Bandwidth Saving:</b> Intelligent event-based transfer
+        </p>
+
+    </div>
+
+</section>
+<!-- =========================================
+     SYSTEM ARCHITECTURE POPUP
+     ========================================= -->
+
+<section class="architecture-box-section">
+
+    <div class="architecture-open-box" onclick="openArchitecture()">
+        <span class="architecture-icon">🏗️</span>
+
+        <div>
+            <h3>RoadGuardian System Architecture</h3>
+            <p>Click to view the complete system architecture</p>
+        </div>
+
+        <span class="architecture-arrow-small">→</span>
+    </div>
+
+</section>
+
+
+<!-- Architecture Popup -->
+
+<div id="architectureModal" class="architecture-modal">
+
+    <div class="architecture-modal-content">
+
+        <button class="architecture-close" onclick="closeArchitecture()">
+            ✕
+        </button>
+
+        <h2>🏗️ RoadGuardian System Architecture</h2>
+
+        <p>
+            End-to-end intelligent road-safety architecture connecting
+            mobile sensing units with central authorities.
+        </p>
+
+        <div class="architecture-flow">
+
+            <div class="architecture-step">
+                <h3>📹 Bus Cameras</h3>
+                <p>
+                    Multiple onboard cameras continuously observe
+                    roads, traffic and surroundings.
+                </p>
+            </div>
+
+            <div class="architecture-arrow">↓</div>
+
+            <div class="architecture-step">
+                <h3>🧠 Edge AI</h3>
+                <p>
+                    Onboard intelligence detects hazards,
+                    vehicles, pedestrians and incidents.
+                </p>
+            </div>
+
+            <div class="architecture-arrow">↓</div>
+
+            <div class="architecture-step">
+                <h3>☁️ Central Platform</h3>
+                <p>
+                    Important events, GPS and timestamps are
+                    aggregated centrally.
+                </p>
+            </div>
+
+            <div class="architecture-arrow">↓</div>
+
+            <div class="architecture-step">
+                <h3>🗺️ GIS & Analytics</h3>
+                <p>
+                    Events are visualized and analyzed for road
+                    conditions, congestion and risk.
+                </p>
+            </div>
+
+            <div class="architecture-arrow">↓</div>
+
+            <div class="architecture-step">
+                <h3>👮 Authorities</h3>
+                <p>
+                    Authorities receive actionable insights for
+                    maintenance, response and enforcement.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+        <!-- Dashboard Cards -->
+        <section class="cards">
+
+            <div class="card">
+
+                <h3>🚗 Active Vehicles</h3>
+
+                <div class="number">
+                    24
+                </div>
+
+                <p>Vehicles contributing road data</p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>🚧 Active Hazards</h3>
+
+                <div class="number">
+                    12
+                </div>
+
+                <p>Hazards detected recently</p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>⚠️ High Risk Zones</h3>
+
+                <div class="number">
+                    4
+                </div>
+
+                <p>Areas requiring attention</p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>💚 Road Health</h3>
+
+                <div class="number"
+                id="roadHealthScore">
+                    87/100
+                </div>
+
+                <p id="roadHealthMessage">
+                    Based on current road hazards
+                </p>
+                <p id="roadHealthBreakdown"></p>
+                <div class="health-bar">
+                    <div id="healthBarFill"></div>
+                </div>
+                <p id="healthLastUpdated">
+                    Updated just now
+                </p>
+            </div>
+            <div class="card">
+
+    <h3>🔮 Risk Prediction</h3>
+
+    <div class="number" id="riskPredictionScore">
+        35%
+    </div>
+
+    <p id="riskPredictionMessage">
+        Moderate future risk
+    </p>
+
+    <p id="riskPredictionFactors">
+    Risk factors: Hazard severity + Weather + Night + Vehicle observations
+    </p>
+</div>
+
+        </section>
+
+<!-- ===============================
+     DRIVER SAFETY ALERT
+     =============================== -->
+
+<section class="alert-section">
+
+    <h2>🚨 Driver Safety Alert</h2>
+                     
+    <div id="driverAlert">
+        <strong>🟢 No immediate danger detected</strong>
+        <p>RoadGuardian is monitoring the route.</p>
+    </div>
+
+</section>
+
+<!-- ===============================
+     EMERGENCY RESPONSE SYSTEM
+     =============================== -->
+
+<section class="emergency-section">
+
+    <h2>🚨 Emergency Response</h2>
+    <div id="emergencyStatusBadge">
+    🟢 SYSTEM NORMAL
+</div>
+
+    <div id="emergencyPanel">
+
+        <strong>🟢 No Emergency Active</strong>
+
+        <p>
+            RoadGuardian is monitoring for serious incidents.
+        </p>
+        <button onclick="simulateAccident()">
+    🚨 Simulate Serious Accident
+</button>
+</div>
+</section>
+ 
+
+
+</div><!-- CLOSE dashboardPage HERE -->
+<div id="liveMapPage" class="page-section">
+        <!-- Map Section -->
+        <section class="map-section">
+
+            <h2>🗺️ Living Road Map</h2>
+
+            <p>
+                Real-time road conditions and detected hazards
+            </p>
+
+            <div id="map"></div>
+
+        </section>
+</div>
+<div id="hazardsPage" 
+class="page-section"
+</div> 
+
+    </main>
+    <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script>
+    // =========================================
+// PAGE NAVIGATION
+// =========================================
+
+function showPage(pageId) {
+
+    document.querySelectorAll(".page-section").forEach(function(page) {
+        page.style.display = "none";
+    });
+
+    const selectedPage = document.getElementById(pageId);
+
+    if (selectedPage) {
+        selectedPage.style.display = "block";
+    }
+
+    // Fix Leaflet map rendering when Live Map is opened
+    if (pageId === "liveMapPage") {
+
+        setTimeout(function() {
+
+            map.invalidateSize();
+
+        }, 300);
+    }
+}
+    const map = L.map('map').setView([17.3850, 78.4867], 10);
+
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            attribution: '&copy; OpenStreetMap contributors'
+        }
+    ).addTo(map);
+    L.marker([17.3850, 78.4867], {
+    icon: getHazardIcon("POTHOLE")
+})
+.addTo(map)
+.bindPopup(`
+    <b>🕳️ Pothole Detected</b><br>
+    Severity: High<br>
+    Confidence: 94%<br>
+    Hazard ID: HZ-0001
+`);
+    L.marker([17.3950, 78.4800], {
+    icon: getHazardIcon("ROAD DAMAGE")
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>⚠️ Road Damage Detected</b><br><br>
+
+        <b>🧬 Hazard DNA</b><br>
+        Hazard ID: HZ-0002<br>
+        Severity: Medium<br>
+        Confidence: 94%<br><br>
+
+        <b>🚗 Vehicle Observations</b><br>
+        First detected by: V-002 🏍️<br>
+        Confirmed by: V-001 🚗<br>
+        Observations: 2 vehicles<br><br>
+
+        <b>✅ Verification: Verified</b><br>
+        Status: Active<br>
+        Repair Status: <span
+        id="repairStatus">Not Reported</span><br>
+        <button onclick="reportRepair()">🔧Report for Repair</button><br>
+        <button onclick="markRepaired()">✅ Mark as Repaired</button><br>
+        <button onclick="verifyRepair()">🔍 Verify Repair</button><br>
+        Last updated: Just now
+    `);
+    // ===============================
+// HZ-0003 - LOW SEVERITY HAZARD
+// ===============================
+
+L.marker([17.3850, 78.4950], {
+    icon: getHazardIcon("MINOR ROAD CRACK")
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>🟢 Minor Road Crack</b><br><br>
+
+        <b>🧬 Hazard DNA</b><br>
+        Hazard ID: HZ-0003<br>
+        Severity: Low<br>
+        Confidence: 82%<br>
+        Status: Active<br><br>
+
+        <b>🚗 Vehicle Observations</b><br>
+        Detected by: V-003 🚌<br>
+        Observations: 1 vehicle<br><br>
+
+        <b>⚠️ Risk Level: Low</b>
+    `);
+    // ===============================
+// HZ-0004 - WATERLOGGING
+// ===============================
+
+L.marker([17.3900, 78.5000], {
+    icon: getHazardIcon("WATERLOGGING")
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>🌊 Waterlogging Detected</b><br><br>
+
+        <b>🧬 Hazard DNA</b><br>
+        Hazard ID: HZ-0004<br>
+        Type: Waterlogging<br>
+        Severity: High<br>
+        Confidence: 89%<br>
+        Status: Active<br><br>
+
+        <b>🚗 Vehicle Detection</b><br>
+        Detected by: V-004 🚚<br>
+        Observations: 1 vehicle<br>
+        Last detected: Just now<br><br>
+
+        <b>⚠️ Risk Level: High</b><br>
+        Heavy rain may increase the risk.
+    `);
+    // ===============================
+// HZ-0005 - ANIMAL-PRONE AREA
+// ===============================
+
+L.marker([17.3800, 78.5100], {
+    icon: getHazardIcon("ANIMAL-PRONE AREA")
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>🐄 Animal-Prone Area</b><br><br>
+
+        <b>🧬 Hazard DNA</b><br>
+        Hazard ID: HZ-0005<br>
+        Type: Animal-Prone Area<br>
+        Severity: Medium<br>
+        Confidence: 86%<br>
+        Status: Active<br><br>
+
+        <b>🚗 Vehicle Observations</b><br>
+        Detected by: V-002 🏍️<br>
+        Observations: 3 vehicles<br>
+        Last detected: Just now<br><br>
+
+        <b>⚠️ Risk Level: Medium</b><br>
+        Animals may enter the road suddenly.
+        Extra caution recommended at night.
+    `);
+    // ===============================
+// HZ-0006 - CONSTRUCTION ZONE
+// ===============================
+
+L.marker([17.3750, 78.5050], {
+    icon: getHazardIcon("CONSTRUCTION ZONE")
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>🚧 Construction Zone</b><br><br>
+
+        <b>🧬 Hazard DNA</b><br>
+        Hazard ID: HZ-0006<br>
+        Type: Road Construction<br>
+        Severity: High<br>
+        Confidence: 91%<br>
+        Status: Active<br><br>
+
+        <b>🚗 Vehicle Observations</b><br>
+        Detected by: V-001 🚗<br>
+        Confirmed by: V-003 🚌<br>
+        Observations: 2 vehicles<br><br>
+
+        <b>⚠️ Risk Level: High</b><br>
+        Road construction may cause lane changes
+        and slower traffic.
+    `);
+    // ===============================
+// HZ-0007 - DANGEROUS CURVE
+// ===============================
+
+L.marker([17.3650, 78.4950], {
+    icon: getHazardIcon("DANGEROUS CURVE")
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>⚠️ Dangerous Curve</b><br><br>
+
+        <b>🧬 Hazard DNA</b><br>
+        Hazard ID: HZ-0007<br>
+        Type: Dangerous Curve<br>
+        Severity: High<br>
+        Confidence: 88%<br>
+        Status: Active<br><br>
+
+        <b>🚗 Vehicle Observations</b><br>
+        Detected by: V-004 🚚<br>
+        Confirmed by: V-002 🏍️<br>
+        Observations: 2 vehicles<br><br>
+
+        <b>⚠️ Risk Level: High</b><br>
+        Reduce speed and drive carefully
+        through this curve.
+    `);
+    // ===============================
+// HZ-0008 - POOR VISIBILITY
+// ===============================
+
+L.marker([17.3600, 78.4850], {
+    icon: getHazardIcon("POOR VISIBILITY")
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>👁️ Poor Visibility Zone</b><br><br>
+
+        <b>🧬 Hazard DNA</b><br>
+        Hazard ID: HZ-0008<br>
+        Type: Poor Visibility<br>
+        Severity: Medium<br>
+        Confidence: 84%<br>
+        Status: Active<br><br>
+
+        <b>🚗 Vehicle Observations</b><br>
+        Detected by: V-003 🚌<br>
+        Confirmed by: V-001 🚗<br>
+        Observations: 2 vehicles<br><br>
+
+        <b>⚠️ Risk Level: Medium</b><br>
+        Reduced visibility detected.
+        Drivers should slow down and remain alert.
+    `);
+    // ===============================
+// HZ-0009 - ACCIDENT LOCATION
+// ===============================
+
+L.marker([17.3550, 78.4750], {
+    icon: L.divIcon({
+        html: `<div class="accident-icon">🚨</div>`,
+        className: "",
+        iconSize: [40, 40],
+        iconAnchor: [20, 20]
+    })
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>🚨 Accident Detected</b><br><br>
+
+        <b>🚨 Incident Details</b><br>
+        Incident ID: INC-0001<br>
+        Severity: Critical<br>
+        Confidence: 96%<br>
+        Status: Emergency Active<br><br>
+
+        <b>🚗 Vehicle Information</b><br>
+        Vehicle ID: V-001<br>
+        Vehicle Type: Car<br><br>
+
+        <b>📍 Location</b><br>
+        GPS Location: 17.3550, 78.4750<br>
+        Detected: Just now<br><br>
+
+        <b>⚠️ Emergency Status</b><br>
+        Emergency assistance may be required.
+    `);
+    // ===============================
+// HZ-0010 - WEATHER RISK
+// ===============================
+
+L.marker([17.3450, 78.4650], {
+    icon: getHazardIcon("WEATHER RISK")
+})
+    .addTo(map)
+    .bindPopup(`
+        <b>🌧️ Weather-Based Risk Zone</b><br><br>
+
+        <b>🧬 Hazard DNA</b><br>
+        Hazard ID: HZ-0010<br>
+        Type: Weather Risk<br>
+        Severity: Medium<br>
+        Confidence: 87%<br>
+        Status: Active<br><br>
+
+        <b>🌧️ Weather Conditions</b><br>
+        Condition: Heavy Rain<br>
+        Visibility: Reduced<br>
+        Road Surface: Wet<br><br>
+
+        <b>⚠️ Risk Prediction</b><br>
+        Waterlogging probability may increase.<br>
+        Slippery-road risk may increase.<br><br>
+
+        <b>🚗 Recommendation</b><br>
+        Reduce speed and drive carefully.
+    `);
+    function reportRepair()
+    {
+    document.getElementById("repairStatus").innerText ="Reported for Repair";
+    alert("🔧 Hazard HZ-0002 has been reported for repair!");
+    }
+    function markRepaired() 
+    {
+    document.getElementById("repairStatus").innerText =
+        "Repaired";
+
+    alert("✅ Hazard HZ-0002 has been marked as repaired!");
+    }
+    function verifyRepair()
+    {
+    document.getElementById("repairStatus").innerText =
+        "Repair Verified";
+
+    alert("🔍 Repair of Hazard HZ-0002 has been verified!");
+    }
+    // ===============================
+// CUSTOM HAZARD ICONS
+// ===============================
+
+function getHazardIcon(hazardType) {
+
+    let icon = "⚠️";
+
+    if (hazardType === "POTHOLE") {
+        icon = "🕳️";
+    }
+    else if (hazardType === "ROAD DAMAGE") {
+        icon = "⚠️";
+    }
+    else if (hazardType === "MINOR ROAD CRACK") {
+        icon = "🔸";
+    }
+    else if (hazardType === "WATERLOGGING") {
+        icon = "🌊";
+    }
+    else if (hazardType === "ANIMAL-PRONE AREA") {
+        icon = "🐄";
+    }
+    else if (hazardType === "CONSTRUCTION ZONE") {
+        icon = "🚧";
+    }
+    else if (hazardType === "DANGEROUS CURVE") {
+        icon = "↪️";
+    }
+    else if (hazardType === "POOR VISIBILITY") {
+        icon = "👁️";
+    }
+    else if (hazardType === "WEATHER RISK") {
+        icon = "🌧️";
+    }
+
+    return L.divIcon({
+        html: `<div class="hazard-icon">${icon}</div>`,
+        className: "",
+        iconSize: [35, 35],
+        iconAnchor: [17, 17]
+    });
+}
+    const carIcon = L.divIcon({
+    html: "🚗",
+    className: "vehicle-icon",
+    iconSize: [30, 30]
+});
+
+const bikeIcon = L.divIcon({
+    html: "🏍️",
+    className: "vehicle-icon",
+    iconSize: [30, 30]
+});
+
+const busIcon = L.divIcon({
+    html: "🚌",
+    className: "vehicle-icon",
+    iconSize: [30, 30]
+});
+
+const truckIcon = L.divIcon({
+    html: "🚚",
+    className: "vehicle-icon",
+    iconSize: [30, 30]
+});
+
+// ===============================
+// ROADGUARDIAN VEHICLES
+// ===============================
+
+// ===============================
+// ROADGUARDIAN HAZARD DATABASE
+// ===============================
+
+const roadHazards = [
+
+    {
+        id: "HZ-0001",
+        location: [17.3850, 78.4867],
+        type: "POTHOLE"
+    },
+
+    {
+        id: "HZ-0002",
+        location: [17.3950, 78.4800],
+        type: "ROAD DAMAGE"
+    },
+
+    {
+        id: "HZ-0003",
+        location: [17.3850, 78.4950],
+        type: "MINOR ROAD CRACK"
+    },
+
+    {
+        id: "HZ-0004",
+        location: [17.3900, 78.5000],
+        type: "WATERLOGGING"
+    },
+
+    {
+        id: "HZ-0005",
+        location: [17.3800, 78.5100],
+        type: "ANIMAL-PRONE AREA"
+    },
+
+    {
+        id: "HZ-0006",
+        location: [17.3750, 78.5050],
+        type: "CONSTRUCTION ZONE"
+    },
+
+    {
+        id: "HZ-0007",
+        location: [17.3650, 78.4950],
+        type: "DANGEROUS CURVE"
+    },
+
+    {
+        id: "HZ-0008",
+        location: [17.3600, 78.4850],
+        type: "POOR VISIBILITY"
+    },
+
+    {
+        id: "HZ-0010",
+        location: [17.3450, 78.4650],
+        type: "WEATHER RISK"
+    }
+
+];
+// ===============================
+// VEHICLE HAZARD ASSIGNMENTS
+// ===============================
+
+const vehicleHazardAssignments = {
+
+    "V-001": [
+        "HZ-0001",
+        "HZ-0002",
+        "HZ-0003"
+    ],
+
+    "V-002": [
+        "HZ-0004",
+        "HZ-0005",
+        "HZ-0006"
+    ],
+
+    "V-003": [
+        "HZ-0007",
+        "HZ-0008"
+    ],
+
+    "V-004": [
+        "HZ-0010"
+    ]
+
+};
+
+// ===============================
+// VEHICLE STARTING POSITIONS
+// ===============================
+
+const vehiclePositions = {
+    "V-001": [17.4000, 78.4700],
+    "V-002": [17.3700, 78.5000],
+    "V-003": [17.4100, 78.4600],
+    "V-004": [17.3500, 78.5200]
+};
+
+
+// ===============================
+// CREATE ONLY ONE MARKER
+// FOR EACH VEHICLE
+// ===============================
+
+const vehicleMarkers = {};
+// Emergency accident marker
+let emergencyMarker = null;
+
+vehicleMarkers["V-001"] = L.marker(vehiclePositions["V-001"], {
+    icon: carIcon
+})
+.addTo(map)
+.bindPopup(`
+    <b>🚗 Vehicle V-001</b><br>
+    Type: Car<br>
+    Status: Active<br>
+    Sending road data...
+`);
+
+vehicleMarkers["V-002"] = L.marker(vehiclePositions["V-002"], {
+    icon: bikeIcon
+})
+.addTo(map)
+.bindPopup(`
+    <b>🏍️ Vehicle V-002</b><br>
+    Type: Bike<br>
+    Status: Active<br>
+    Sending road data...
+`);
+
+vehicleMarkers["V-003"] = L.marker(vehiclePositions["V-003"], {
+    icon: busIcon
+})
+.addTo(map)
+.bindPopup(`
+    <b>🚌 Vehicle V-003</b><br>
+    Type: Bus<br>
+    Status: Active<br>
+    Sending road data...
+`);
+
+vehicleMarkers["V-004"] = L.marker(vehiclePositions["V-004"], {
+    icon: truckIcon
+})
+.addTo(map)
+.bindPopup(`
+    <b>🚚 Vehicle V-004</b><br>
+    Type: Truck / Lorry<br>
+    Status: Active<br>
+    Sending road data...
+`);
+
+
+// ===============================
+// VEHICLE ROUTES
+// ===============================
+
+const v001Route = [
+
+    // 🚗 V-001 START
+    [17.4000, 78.4700],
+
+    // 🕳️ HZ-0001 - Pothole
+    [17.3950, 78.4770],
+    [17.3900, 78.4820],
+    [17.3850, 78.4867],
+
+    // ⚠️ HZ-0002 - Road Damage
+    [17.3900, 78.4830],
+    [17.3950, 78.4800],
+
+    // 🟢 HZ-0003 - Minor Road Crack
+    [17.3900, 78.4880],
+    [17.3850, 78.4950],
+
+    // Finish
+    [17.3800, 78.5000]
+
+];
+
+const v002Route = [
+
+    // 🏍️ V-002 START
+    [17.3700, 78.5000],
+
+    // 🌊 HZ-0004 - Waterlogging
+    [17.3800, 78.5000],
+    [17.3900, 78.5000],
+
+    // 🐄 HZ-0005 - Animal-Prone Area
+    [17.3850, 78.5050],
+    [17.3800, 78.5100],
+
+    // 🚧 HZ-0006 - Construction Zone
+    [17.3770, 78.5070],
+    [17.3750, 78.5050],
+
+    // Finish
+    [17.3700, 78.5000]
+
+];
+
+const v003Route = [
+
+    // 🚌 V-003 START
+    [17.4100, 78.4600],
+
+    // ⚠️ HZ-0007 - Dangerous Curve
+    [17.3900, 78.4700],
+    [17.3750, 78.4850],
+    [17.3650, 78.4950],
+
+    // 👁️ HZ-0008 - Poor Visibility
+    [17.3620, 78.4900],
+    [17.3600, 78.4850],
+
+    // Finish
+    [17.3550, 78.4800]
+
+];
+
+const v004Route = [
+    [17.3500, 78.5200],
+    [17.3510, 78.5190],
+    [17.3520, 78.5180],
+    [17.3530, 78.5170],
+    [17.3540, 78.5160],
+    [17.3550, 78.5150]
+];
+
+
+// ===============================
+// MOVEMENT FUNCTION
+// ===============================
+
+function moveVehicle(vehicleId, route, speed) {
+
+    let step = 0;
+    let direction = 1;
+
+    setInterval(function() {
+
+        vehicleMarkers[vehicleId].setLatLng(
+            route[step]
+        );
+
+        step += direction;
+
+        // When vehicle reaches the end,
+        // make it turn around instead of jumping
+        if (step >= route.length - 1) {
+            direction = -1;
+        }
+
+        if (step <= 0) {
+            direction = 1;
+        }
+
+    }, speed);
+}
+
+
+// ===============================
+// START VEHICLE MOVEMENT
+// ===============================
+
+moveVehicle("V-001", v001Route, 1500);
+
+moveVehicle("V-002", v002Route, 1800);
+
+moveVehicle("V-003", v003Route, 2000);
+
+moveVehicle("V-004", v004Route, 2200);
+// ===============================
+// ROAD HEALTH SCORE
+// ===============================
+
+let roadHealthScore = 100;
+
+const highSeverityHazards = 4;
+const mediumSeverityHazards = 4;
+const lowSeverityHazards = 1;
+
+roadHealthScore =
+    roadHealthScore -
+    (highSeverityHazards * 10) -
+    (mediumSeverityHazards * 5) -
+    (lowSeverityHazards * 2);
+if (roadHealthScore < 0) {
+    roadHealthScore = 0;
+}
+
+document.getElementById("roadHealthScore").innerText =
+    roadHealthScore + "/100";
+    document.getElementById("healthBarFill").style.width =
+    roadHealthScore + "%";
+    let healthUpdateTime = Date.now();
+
+function updateHealthTime()
+{
+    let secondsAgo =
+        Math.floor((Date.now() - healthUpdateTime) / 1000);
+
+    if (secondsAgo < 2)
+    {
+        document.getElementById("healthLastUpdated").innerText =
+            "Updated just now";
+    }
+    else
+    {
+        document.getElementById("healthLastUpdated").innerText =
+            "Updated " + secondsAgo + " seconds ago";
+    }
+}
+
+setInterval(updateHealthTime, 1000);
+    // ===============================
+// ROAD HEALTH MESSAGE
+// ===============================
+
+let healthMessage = "";
+
+if (roadHealthScore >= 90) {
+    healthMessage = "🟢 Road condition is good";
+}
+else if (roadHealthScore >= 70) {
+    healthMessage = "🟡 Some hazards detected";
+}
+else if (roadHealthScore >= 40) {
+    healthMessage = "🟠 Road requires attention";
+}
+else {
+    healthMessage = "🔴 High-risk road condition";
+}
+
+document.getElementById("roadHealthMessage").innerText =
+    healthMessage;
+// ===============================
+// ROAD HEALTH BREAKDOWN
+// ===============================
+
+const healthBreakdown =
+    "🔴 High hazards: -" +
+    (highSeverityHazards * 10) +
+    " points<br>" +
+    "🟠 Medium hazards: -" +
+    (mediumSeverityHazards * 5) +
+    " points<br>" +
+    "🟢 Low hazards: -" +
+    (lowSeverityHazards * 2) +
+    " points";
+
+document.getElementById("roadHealthBreakdown").innerHTML =
+    healthBreakdown;
+// ===============================
+// RISK PREDICTION ENGINE
+// ===============================
+
+let riskPrediction = 0;
+
+// Current hazard impact
+riskPrediction =
+    (highSeverityHazards * 12) +
+    (mediumSeverityHazards * 7) +
+    (lowSeverityHazards * 3);
+
+// Additional risk factors
+const weatherRisk = 10;
+const isNightTime = true;
+
+const nightRisk = isNightTime ? 5 : 0;
+const repeatedObservationRisk = 5;
+
+// Add additional risk
+riskPrediction =
+    riskPrediction +
+    weatherRisk +
+    nightRisk +
+    repeatedObservationRisk;
+
+// Maximum limit
+if (riskPrediction > 100) {
+    riskPrediction = 100;
+}
+
+// Update prediction score
+document.getElementById("riskPredictionScore").innerText =
+    riskPrediction + "%";
+
+// Risk message
+let riskMessage = "";
+
+if (riskPrediction < 30) {
+    riskMessage = "🟢 Low future risk";
+}
+else if (riskPrediction < 60) {
+    riskMessage = "🟡 Moderate future risk";
+}
+else if (riskPrediction < 80) {
+    riskMessage = "🟠 High future risk";
+}
+else {
+    riskMessage = "🔴 Critical future risk";
+}
+
+document.getElementById("riskPredictionMessage").innerText =
+    riskMessage;
+    // Risk factor explanation
+document.getElementById("riskPredictionFactors").innerText =
+    "Risk factors: " +
+    "High hazards +" + (highSeverityHazards * 12) +
+    " | Medium hazards +" + (mediumSeverityHazards * 7) +
+    " | Low hazards +" + (lowSeverityHazards * 3) +
+    " | Weather +" + weatherRisk +
+    " | Night +" + nightRisk +
+    " | Vehicle observations +" + repeatedObservationRisk;
+// ===============================
+// ACTIVE HAZARD LOCATION
+// ===============================
+
+let activeHazardLocation = null;
+// ===============================
+// DRIVER SAFETY WARNING SYSTEM
+// ===============================
+
+function showDriverWarning(
+    hazardType,
+    distance,
+    message
+) {
+    const alertBox =
+        document.getElementById("driverAlert");
+        let safetyInstruction = "";
+
+if (hazardType === "POTHOLE") {
+
+    safetyInstruction =
+        "🕳️ Slow down and avoid the pothole if possible.";
+
+}
+else if (hazardType === "WATERLOGGING") {
+
+    safetyInstruction =
+        "🌊 Reduce speed and avoid the waterlogged area.";
+
+}
+else if (hazardType === "ANIMAL-PRONE AREA") {
+
+    safetyInstruction =
+        "🐄 Stay alert and watch for animals entering the road.";
+
+}
+else if (hazardType === "CONSTRUCTION ZONE") {
+
+    safetyInstruction =
+        "🚧 Follow lane signs and watch for construction activity.";
+
+}
+else if (hazardType === "DANGEROUS CURVE") {
+
+    safetyInstruction =
+        "⚠️ Reduce speed before entering the curve.";
+
+}
+else {
+
+    safetyInstruction =
+        "⚠️ Slow down and drive carefully.";
+
+}
+
+   alertBox.innerHTML = `
+    <strong>⚠️ ${hazardType} AHEAD</strong>
+    <p>📍 Distance: ${distance}</p>
+    <p>${safetyInstruction}</p>
+
+    <button onclick="focusOnHazard()">
+    🗺️ View Hazard on Map
+</button>
+
+<button onclick="showNextHazard()">
+    ➡️ Next Hazard
+</button>
+    `;
+}
+
+// Demo warning sequence
+
+setTimeout(function() {
+
+    showDriverWarning(
+        "POTHOLE",
+        "500 meters",
+        "🚗 Slow down and drive carefully."
+    );
+
+}, 3000);
+
+
+setTimeout(function() {
+
+    showDriverWarning(
+        "WATERLOGGING",
+        "1.2 km",
+        "🌊 Reduce speed and avoid the affected area."
+    );
+
+}, 8000);
+
+
+setTimeout(function() {
+
+    showDriverWarning(
+        "ANIMAL-PRONE AREA",
+        "800 meters",
+        "🐄 Slow down and stay alert, especially at night."
+    );
+
+}, 13000);
+setTimeout(function() {
+
+    showDriverWarning(
+        "CONSTRUCTION ZONE",
+        "1.5 km",
+        "🚧 Lane changes ahead. Slow down and follow road signs."
+    );
+
+}, 18000);
+
+
+setTimeout(function() {
+
+    showDriverWarning(
+        "DANGEROUS CURVE",
+        "700 meters",
+        "⚠️ Reduce speed before entering the curve."
+    );
+
+}, 23000);
+// ===============================
+// HAZARD DISTANCE CALCULATION
+// ===============================
+
+function getDistanceToHazard(vehicleId, hazardLocation) {
+
+    const vehicleLocation =
+        vehicleMarkers[vehicleId].getLatLng();
+
+    const hazardLatLng =
+        L.latLng(
+            hazardLocation[0],
+            hazardLocation[1]
+        );
+
+    const distance =
+        vehicleLocation.distanceTo(hazardLatLng);
+
+    return Math.round(distance);
+}
+const testDistance =
+    getDistanceToHazard(
+        "V-001",
+        [17.3850, 78.4867]
+    );
+
+console.log(
+    "Distance from V-001 to HZ-0001:",
+    testDistance,
+    "meters"
+);
+// ===============================
+// LOCATION-BASED DRIVER WARNING
+// ===============================
+
+function checkHazardDistance(
+    vehicleId,
+    hazardId,
+    hazardLocation,
+    hazardType
+) {
+
+    const distance =
+        getDistanceToHazard(
+            vehicleId,
+            hazardLocation
+        );
+    activeHazardLocation = hazardLocation;
+
+    console.log(
+        vehicleId +
+        " → " +
+        hazardId +
+        " distance: " +
+        distance +
+        " meters"
+    );
+
+    if (distance <= 1000 && distance > 500) {
+        document.getElementById("driverAlert").className = "alert-warning";
+
+    showDriverWarning(
+        hazardType,
+        distance + " meters",
+        "⚠️ Hazard detected ahead. Slow down and drive carefully."
+    );
+
+}
+else if (distance <= 500 && distance > 200) {
+    document.getElementById("driverAlert").className = "alert-danger";
+
+    showDriverWarning(
+        hazardType,
+        distance + " meters",
+        "🚨 Hazard is very close! Reduce speed immediately."
+    );
+
+}
+else if (distance <= 200) {
+    document.getElementById("driverAlert").className = "alert-critical";
+
+    showDriverWarning(
+        hazardType,
+        distance + " meters",
+        "🔴 IMMEDIATE DANGER! Slow down and prepare to stop safely."
+    );
+
+}
+else {
+    document.getElementById("driverAlert").className = "alert-safe";
+
+    document.getElementById("driverAlert").innerHTML = `
+        <strong>🟢 No immediate danger detected</strong>
+        <p>RoadGuardian is monitoring the route.</p>
+    `;
+
+}
+}
+// ===============================
+// CONTINUOUS HAZARD MONITORING
+// ===============================
+
+// ===============================
+// MULTI-HAZARD MONITORING
+// ===============================
+
+function checkAllHazards(vehicleId) {
+
+    let nearestHazard = null;
+    let nearestDistance = Infinity;
+
+    const assignedHazards =
+        vehicleHazardAssignments[vehicleId];
+
+    if (!assignedHazards) {
+        return;
+    }
+
+    assignedHazards.forEach(function(hazardId) {
+
+        const hazard =
+            roadHazards.find(function(item) {
+                return item.id === hazardId;
+            });
+
+        if (!hazard) {
+            return;
+        }
+
+        const distance =
+            getDistanceToHazard(
+                vehicleId,
+                hazard.location
+            );
+
+        if (distance < nearestDistance) {
+
+            nearestDistance = distance;
+            nearestHazard = hazard;
+
+        }
+
+    });
+
+    if (nearestHazard) {
+
+        checkHazardDistance(
+            vehicleId,
+            nearestHazard.id,
+            nearestHazard.location,
+            nearestHazard.type
+        );
+
+        console.log(
+            vehicleId +
+            " → Assigned hazard: " +
+            nearestHazard.id +
+            " → " +
+            nearestHazard.type +
+            " → " +
+            nearestDistance +
+            " meters"
+        );
+    }
+}
+
+
+// ===============================
+// MULTI-VEHICLE SAFETY MONITOR
+// ===============================
+
+function monitorAllVehicles() {
+
+    let closestVehicle = null;
+    let closestHazard = null;
+    let closestDistance = Infinity;
+
+    const vehicles = [
+        "V-001",
+        "V-002",
+        "V-003",
+        "V-004"
+    ];
+
+    vehicles.forEach(function(vehicleId) {
+
+        const assignedHazards =
+            vehicleHazardAssignments[vehicleId];
+
+        if (!assignedHazards) {
+            return;
+        }
+
+        assignedHazards.forEach(function(hazardId) {
+
+            const hazard =
+                roadHazards.find(function(item) {
+                    return item.id === hazardId;
+                });
+
+            if (!hazard) {
+                return;
+            }
+
+            const distance =
+                getDistanceToHazard(
+                    vehicleId,
+                    hazard.location
+                );
+
+            console.log(
+                vehicleId +
+                " → " +
+                hazard.id +
+                " distance: " +
+                distance +
+                " meters"
+            );
+
+            if (distance < closestDistance) {
+
+                closestDistance = distance;
+                closestVehicle = vehicleId;
+                closestHazard = hazard;
+
+            }
+
+        });
+
+    });
+
+    // ===============================
+    // SHOW ALERT FOR CLOSEST HAZARD
+    // ===============================
+
+    if (closestVehicle && closestHazard) {
+
+        activeHazardLocation =
+            closestHazard.location;
+
+        checkHazardDistance(
+            closestVehicle,
+            closestHazard.id,
+            closestHazard.location,
+            closestHazard.type
+        );
+
+        console.log(
+            "🚨 Closest:",
+            closestVehicle,
+            closestHazard.id,
+            closestHazard.type,
+            closestDistance,
+            "meters"
+        );
+
+    }
+
+}
+
+setInterval(function() {
+
+    checkAllHazards("V-001");
+
+}, 1000);
+// ===============================
+// FOCUS ON ACTIVE HAZARD
+// ===============================
+
+function focusOnHazard() {
+
+    if (activeHazardLocation) {
+
+        map.setView(
+            activeHazardLocation,
+            15
+        );
+
+    }
+
+}
+function focusOnIncident() {
+
+    const incidentLocation = [
+        17.3550,
+        78.4750
+    ];
+
+    // Scroll to the map
+    document.getElementById("map").scrollIntoView({
+        behavior: "smooth"
+    });
+
+    // Move the map to the accident location
+    setTimeout(function() {
+
+        map.setView(
+            incidentLocation,
+            15
+        );
+
+        // Open the accident marker if it exists
+        if (emergencyMarker) {
+            emergencyMarker.openPopup();
+        }
+
+    }, 500);
+}
+// ===============================
+// NEXT HAZARD FOR V-001
+// ===============================
+
+let currentHazardIndex = 0;
+
+function showNextHazard() {
+
+    const assignedHazards =
+        vehicleHazardAssignments["V-001"];
+
+    currentHazardIndex++;
+
+    if (currentHazardIndex >= assignedHazards.length) {
+        currentHazardIndex = 0;
+    }
+
+    const nextHazardId =
+        assignedHazards[currentHazardIndex];
+
+    const nextHazard =
+        roadHazards.find(function(hazard) {
+            return hazard.id === nextHazardId;
+        });
+
+    if (!nextHazard) {
+        return;
+    }
+
+    activeHazardLocation =
+        nextHazard.location;
+
+    map.setView(
+        nextHazard.location,
+        15
+    );
+
+    showDriverWarning(
+        nextHazard.type,
+        "Demo",
+        "⚠️ Upcoming hazard detected. Drive carefully."
+    );
+
+}
+// ===============================
+// PHASE 10 - EMERGENCY SYSTEM
+// ===============================
+
+// Emergency timer
+let emergencyTimer = null;
+let emergencySeconds = 10;
+
+
+// ===============================
+// ACCIDENT DETECTION SIMULATION
+// ===============================
+
+function simulateAccident() {
+    document.getElementById("emergencyStatusBadge").innerText =
+        "🔴 EMERGENCY DETECTED";
+
+    const emergencyPanel =
+        document.getElementById("emergencyPanel");
+
+    const incidentId = "INC-0001";
+
+    const vehicleId = "V-001";
+
+    const accidentLocation = [
+        17.3550,
+        78.4750
+    ];
+
+    const accidentTime =
+        new Date().toLocaleTimeString();
+
+    // Reset countdown
+    emergencySeconds = 10;
+
+    // Stop previous timer if running
+    if (emergencyTimer) {
+        clearInterval(emergencyTimer);
+        emergencyTimer = null;
+    }
+
+    // Show accident screen
+    emergencyPanel.innerHTML = `
+
+        <strong>🚨 SERIOUS ACCIDENT DETECTED</strong>
+
+        <p>
+            <b>🆔 Incident ID:</b>
+            ${incidentId}
+        </p>
+
+        <p>
+            <b>🚗 Vehicle ID:</b>
+            ${vehicleId}
+        </p>
+
+        <p>
+            <b>⚠️ Severity:</b>
+            Critical
+        </p>
+
+        <p>
+            <b>📍 GPS Location:</b>
+            ${accidentLocation[0]},
+            ${accidentLocation[1]}
+        </p>
+
+        <p>
+            <b>🕐 Detected:</b>
+            ${accidentTime}
+        </p>
+
+        <hr>
+
+        <strong>Are you safe?</strong>
+
+        <p id="emergencyCountdown">
+            ⏱️ Waiting for response: 10 seconds
+        </p>
+
+        <button onclick="cancelEmergency()">
+            ✅ I'm Safe / Cancel Alert
+        </button>
+
+        <button onclick="requestEmergencyHelp()">
+            🚑 Need Help
+        </button>
+
+    `;
+
+    // Focus map on accident location
+    map.setView(
+        accidentLocation,
+        15
+    );
+    // ===============================
+// SHOW ACCIDENT ON MAP
+// ===============================
+
+if (emergencyMarker) {
+    map.removeLayer(emergencyMarker);
+}
+const accidentIcon = L.divIcon({
+    html: `<div class="accident-icon">🚨</div>`,
+    className: "",
+    iconSize: [40, 40],
+    iconAnchor: [20, 20]
+});
+
+emergencyMarker = L.marker(
+    accidentLocation
+)
+.addTo(map)
+.bindPopup(`
+    <b>🚨 SERIOUS ACCIDENT</b><br><br>
+
+    <b>🆔 Incident ID:</b> INC-0001<br>
+    <b>🚗 Vehicle ID:</b> V-001<br>
+    <b>⚠️ Severity:</b> Critical<br>
+    <b>📍 Location:</b> 17.3550, 78.4750<br><br>
+
+    <b>🔴 Emergency:</b> Active
+`)
+.openPopup();
+
+
+    // ===============================
+    // START 10 SECOND COUNTDOWN
+    // ===============================
+
+    emergencyTimer = setInterval(function() {
+
+        emergencySeconds--;
+
+        const countdown =
+            document.getElementById("emergencyCountdown");
+
+        if (countdown) {
+
+            countdown.innerText =
+                "⏱️ Waiting for response: " +
+                emergencySeconds +
+                " seconds";
+
+        }
+
+
+        // No response after 10 seconds
+        if (emergencySeconds <= 0) {
+
+            clearInterval(emergencyTimer);
+
+            emergencyTimer = null;
+
+            requestEmergencyHelp();
+
+        }
+
+    }, 1000);
+
+}
+
+
+// ===============================
+// CANCEL EMERGENCY
+// ===============================
+
+function cancelEmergency() {
+
+    // Stop countdown
+    if (emergencyTimer) {
+
+        clearInterval(emergencyTimer);
+
+        emergencyTimer = null;
+
+    }
+
+    const emergencyPanel =
+        document.getElementById("emergencyPanel");
+
+    emergencyPanel.innerHTML = `
+
+        <strong>✅ Emergency Alert Cancelled</strong>
+
+        <p>
+            The driver confirmed that they are safe.
+        </p>
+
+        <p>
+            🚗 Vehicle V-001
+        </p>
+
+        <p>
+            🆔 Incident ID: INC-0001
+        </p>
+
+        <p>
+            🟢 No emergency escalation required.
+        </p>
+
+        <button onclick="simulateAccident()">
+            🚨 Simulate Serious Accident Again
+        </button>
+
+    `;
+
+}
+
+
+// ===============================
+// REQUEST EMERGENCY HELP
+// ===============================
+
+function requestEmergencyHelp() {
+    document.getElementById("emergencyStatusBadge").innerText =
+        "🔴 EMERGENCY ACTIVE";
+        document.getElementById("activeEmergencyCount").innerText =
+        "1";
+        document.getElementById("incidentStatus").innerText =
+    "🔴 Active";
+
+    // Stop countdown
+    if (emergencyTimer) {
+
+        clearInterval(emergencyTimer);
+
+        emergencyTimer = null;
+
+    }
+
+    const emergencyPanel =
+        document.getElementById("emergencyPanel");
+
+    emergencyPanel.innerHTML = `
+
+        <strong>🚨 EMERGENCY RESPONSE ACTIVATED</strong>
+
+        <p>
+            <b>🆔 Incident ID:</b>
+            INC-0001
+        </p>
+
+        <p>
+            <b>🚗 Vehicle ID:</b>
+            V-001
+        </p>
+
+        <p>
+            <b>⚠️ Severity:</b>
+            Critical
+        </p>
+        <p>
+    <b>🚨 Priority:</b>
+    HIGH PRIORITY
+</p>
+
+        <p>
+            <b>📍 GPS Location:</b>
+            17.3550, 78.4750
+        </p>
+        <p>
+    <b>🕐 Incident Time:</b>
+    ${new Date().toLocaleTimeString()}
+</p>
+
+<p>
+    <b>📊 Impact Level:</b>
+    Severe
+</p>
+
+<p>
+    <b>🛰️ Location Source:</b>
+    Vehicle GPS
+</p>
+
+<p>
+    <b>🔍 Detection Source:</b>
+    RoadGuardian AI
+</p>
+
+        <hr>
+
+        <p>
+            👮 <b>Authority Alert:</b>
+            Emergency incident reported
+        </p>
+
+        <p>
+            🏥 <b>Hospital Alert:</b>
+            Emergency assistance requested
+        </p>
+
+        <p>
+    📱 <b>Trusted Contact Alert:</b>
+    Notification sent automatically
+</p>
+
+<p>
+    👤 <b>Trusted Contact:</b>
+    Emergency Contact
+</p>
+
+<p>
+    📩 <b>Contact Notification:</b>
+    Accident details and location shared
+</p>
+
+        <p>
+            📩 <b>Notification:</b>
+            Your registered trusted contact has been
+            notified about the emergency.
+        </p>
+
+        <p>
+            🟢 <b>Notification Status:</b>
+            Sent (Prototype)
+        </p>
+
+        <p>
+            🔴 <b>Emergency Status:</b>
+            Emergency escalation active
+        </p>
+        <button onclick="resolveEmergency()">
+    ✅ Mark Emergency Resolved
+</button>
+        <hr>
+
+<strong>📋 Emergency Response Timeline</strong>
+
+<p>
+    ✅ Accident detected
+</p>
+
+<p>
+    ✅ GPS location identified
+</p>
+
+<p>
+    ✅ Authority alert activated
+</p>
+
+<p>
+    ✅ Hospital assistance requested
+</p>
+
+<p>
+    ✅ Trusted contact notified automatically
+</p>
+
+<p>
+    🔴 Emergency response currently active
+</p>
+
+    `;
+
+}
+// ===============================
+// RESOLVE EMERGENCY
+// ===============================
+
+function resolveEmergency() {
+    // Remove accident marker from map
+    if (emergencyMarker) {
+
+        map.removeLayer(emergencyMarker);
+
+        emergencyMarker = null;
+
+    }
+    document.getElementById("emergencyStatusBadge").innerText =
+        "✅ EMERGENCY RESOLVED";
+        document.getElementById("activeEmergencyCount").innerText =
+        "0";
+        document.getElementById("incidentStatus").innerText =
+    "🟢 Resolved";
+
+    const emergencyPanel =
+        document.getElementById("emergencyPanel");
+
+    emergencyPanel.innerHTML = `
+
+        <strong>✅ EMERGENCY RESOLVED</strong>
+
+        <p>
+            <b>🆔 Incident ID:</b>
+            INC-0001
+        </p>
+
+        <p>
+            <b>🚗 Vehicle ID:</b>
+            V-001
+        </p>
+
+        <p>
+            🟢 Emergency response has been completed.
+        </p>
+
+        <p>
+            📋 Incident has been marked as resolved.
+        </p>
+
+        <p>
+            📱 Trusted contact notification:
+            Completed
+        </p>
+
+        <button onclick="simulateAccident()">
+            🚨 Simulate New Accident
+        </button>
+
+    `;
+
+}
+// ===============================
+// TRUSTED CLOSE CONTACT ALERT
+// ===============================
+
+function notifyCloseContact() {
+
+    const emergencyPanel =
+        document.getElementById("emergencyPanel");
+
+    emergencyPanel.innerHTML = `
+
+        <strong>📱 TRUSTED CONTACT NOTIFIED</strong>
+
+        <p>
+            <b>🚗 Vehicle ID:</b>
+            V-001
+        </p>
+
+        <p>
+            <b>🆔 Incident ID:</b>
+            INC-0001
+        </p>
+
+        <p>
+            <b>⚠️ Incident:</b>
+            Serious accident detected
+        </p>
+
+        <p>
+            <b>📍 Location:</b>
+            17.3550, 78.4750
+        </p>
+
+        <hr>
+
+        <p>
+            📩 <b>Message:</b>
+        </p>
+
+        <p>
+            Vehicle V-001 has been involved
+            in a serious accident.
+            Emergency assistance has been requested.
+        </p>
+
+        <p>
+            🟢 <b>Notification Status:</b>
+            Sent (Prototype)
+        </p>
+
+        <p>
+            🔴 <b>Emergency Status:</b>
+            Active
+        </p>
+
+    `;
+
+}
+// ===============================
+// PHASE 12 - AI ROAD INTELLIGENCE
+// ===============================
+
+function runAIAnalysis() {
+
+    const vehicles = 24;
+    const hazards = 9;
+    const risk = 99;
+    const night = true;
+    const weather = 10;
+
+    let insight = "";
+    let aiStatus = "";
+
+    if (risk >= 80 && hazards >= 7) {
+
+    aiStatus = "🔴 AI STATUS: CRITICAL ROAD RISK";
+
+    insight =
+        "🔴 Critical road risk detected. " +
+        "Multiple hazards and high predicted risk require immediate driver caution.";
+
+}
+else if (risk >= 60) {
+
+    aiStatus = "🟠 AI STATUS: HIGH ROAD RISK";
+
+    insight =
+        "🟠 High road risk detected. " +
+        "RoadGuardian recommends increased caution on this route.";
+
+}
+else if (risk >= 30) {
+
+    aiStatus = "🟡 AI STATUS: MODERATE ROAD RISK";
+
+    insight =
+        "🟡 Moderate road risk detected. " +
+        "Some hazards require driver attention.";
+
+}
+else {
+
+    aiStatus = "🟢 AI STATUS: LOW ROAD RISK";
+
+    insight =
+        "🟢 Low road risk detected. " +
+        "Current road conditions appear relatively safe.";
+
+}
+
+    if (night) {
+
+        insight +=
+            " Night conditions may increase visibility and animal-related risks.";
+
+    }
+
+    if (weather > 0) {
+
+        insight +=
+            " Weather conditions are also included in the risk analysis.";
+
+    }
+
+    document.getElementById("aiStatus").innerText =
+    aiStatus;
+    document.getElementById("aiInsight").innerHTML = `
+
+        <strong>🤖 AI Road Intelligence Result</strong>
+
+        <p>
+            ${insight}
+        </p>
+
+        <p>
+            📊 Analysis based on
+            ${vehicles} vehicle observations,
+            ${hazards} active hazards,
+            ${risk}% predicted risk,
+            night conditions and weather data.
+        </p>
+
+    `;
+}
+
+runAIAnalysis();
+// ===============================
+// PHASE 15 - TRAFFIC INTELLIGENCE
+// ===============================
+
+function runTrafficAnalysis() {
+
+    const vehicles = 47;
+
+    let density = "";
+
+    if (vehicles >= 40) {
+        density = "High";
+    }
+    else if (vehicles >= 20) {
+        density = "Moderate";
+    }
+    else {
+        density = "Low";
+    }
+
+    document.getElementById("vehicleCount").innerText = vehicles;
+
+    document.getElementById("trafficDensity").innerText = density;
+
+    if (density === "High") {
+
+        document.getElementById("trafficStatus").innerText =
+            "🔴 TRAFFIC AI: HIGH CONGESTION DETECTED";
+
+    }
+    else {
+
+        document.getElementById("trafficStatus").innerText =
+            "🟢 TRAFFIC AI: TRAFFIC FLOW NORMAL";
+
+    }
+}
+
+runTrafficAnalysis();
+// ===============================
+// PHASE 16 - INCIDENT AI
+// ===============================
+
+function runIncidentAnalysis() {
+
+    const pedestrianRisk = true;
+    const rashDriving = true;
+    const hitAndRun = true;
+    const plateConfidence = 94;
+
+    let incidentMessage = "";
+
+    if (hitAndRun) {
+
+        incidentMessage =
+            "🔴 Serious incident detected. " +
+            "Vehicle tracking and registration analysis activated.";
+
+    }
+    else if (rashDriving) {
+
+        incidentMessage =
+            "🟠 Rash-driving behaviour detected. " +
+            "Additional monitoring recommended.";
+
+    }
+    else if (pedestrianRisk) {
+
+        incidentMessage =
+            "🟡 Vulnerable pedestrian situation detected. " +
+            "Driver caution recommended.";
+
+    }
+    else {
+
+        incidentMessage =
+            "🟢 No serious incident detected.";
+
+    }
+
+    console.log("🚨 RoadGuardian Incident AI:");
+    console.log(incidentMessage);
+    console.log("🔢 Registration confidence:", plateConfidence + "%");
+}
+
+runIncidentAnalysis();
+// ===============================
+// PHASE 17 - CENTRAL AI STATUS
+// ===============================
+
+function runCentralAnalysis() {
+
+    const activeVehicles = 24;
+    const activeHazards = 9;
+    const trafficLevel = "HIGH";
+    const routeDelay = 13;
+
+    console.log("🏙️ RoadGuardian Central Intelligence");
+    console.log("🚌 Active Fleet:", activeVehicles);
+    console.log("🚧 Active Hazards:", activeHazards);
+    console.log("🚦 Traffic Level:", trafficLevel);
+    console.log("⏱️ Estimated Route Delay:", routeDelay + " minutes");
+
+    if (trafficLevel === "HIGH") {
+        console.log("⚠️ Central AI Recommendation: Monitor congested routes.");
+    }
+
+    if (activeHazards >= 7) {
+        console.log("🔧 Central AI Recommendation: Prioritize road inspection.");
+    }
+}
+
+runCentralAnalysis();
+function openArchitecture() {
+    document.getElementById("architectureModal").style.display = "flex";
+}
+
+function closeArchitecture() {
+    document.getElementById("architectureModal").style.display = "none";
+}
+// =========================================
+// INITIAL PAGE
+// =========================================
+
+showPage("dashboardPage");
+</script>
+
+</body>
+</html>

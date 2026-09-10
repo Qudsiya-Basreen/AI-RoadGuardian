@@ -1,0 +1,1111 @@
+/* =========================================
+   ROADGUARDIAN - COMPACT MODERN DASHBOARD
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* =========================================
+   NAVBAR
+   ========================================= */
+
+.navbar {
+    background: #111827;
+    color: white;
+    padding: 12px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+    font-size: 14px;
+}
+
+.nav-links span {
+    cursor: pointer;
+}
+
+.nav-links span:hover {
+    color: #60a5fa;
+}
+
+/* =========================================
+   MAIN CONTAINER
+   ========================================= */
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+    padding: 18px 25px;
+}
+
+/* =========================================
+   WELCOME
+   ========================================= */
+
+.welcome {
+    margin-bottom: 15px;
+}
+
+.welcome h1 {
+    font-size: 27px;
+    margin-bottom: 3px;
+}
+
+.welcome p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* =========================================
+   COMMON SECTION STYLE
+   ========================================= */
+
+section {
+    margin-top: 16px;
+}
+
+.authority-section,
+.ai-section,
+.traffic-section,
+.infrastructure-section,
+.incident-intelligence-section,
+.central-section,
+.edge-section,
+.architecture-section,
+.alert-section,
+.emergency-section,
+.map-section {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+section h2 {
+    font-size: 19px;
+    margin-bottom: 4px;
+}
+
+section > p {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* =========================================
+   DASHBOARD STAT CARDS
+   ========================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.card {
+    background: white;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.06);
+}
+
+.card h3 {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.card .number {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.card p {
+    font-size: 11px;
+    color: #64748b;
+    line-height: 1.3;
+}
+
+/* =========================================
+   ROAD HEALTH
+   ========================================= */
+
+.health-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    margin-top: 7px;
+    overflow: hidden;
+}
+
+#healthBarFill {
+    height: 100%;
+    width: 0%;
+    background: #22c55e;
+    border-radius: 10px;
+}
+
+#healthLastUpdated {
+    margin-top: 5px;
+}
+
+/* =========================================
+   AUTHORITY DASHBOARD
+   ========================================= */
+
+.authority-section {
+    margin-top: 16px;
+}
+
+.authority-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.authority-card {
+    background: white;
+    padding: 12px;
+    border-radius: 9px;
+    border: 1px solid #e2e8f0;
+}
+
+.authority-card h3 {
+    font-size: 13px;
+}
+
+.authority-number {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.authority-card p {
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* =========================================
+   INCIDENT TABLE
+   ========================================= */
+
+.incident-table-container {
+    margin-top: 12px;
+    background: white;
+    padding: 12px;
+    border-radius: 9px;
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+}
+
+.incident-table-container h3 {
+    font-size: 14px;
+}
+
+.incident-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.incident-table th,
+.incident-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.incident-table th {
+    font-size: 11px;
+    background: #f8fafc;
+}
+
+/* =========================================
+   AI SECTION
+   ========================================= */
+
+.ai-section {
+    margin-top: 16px;
+}
+
+.ai-section h2 {
+    margin-bottom: 3px;
+}
+
+#aiStatus {
+    padding: 8px 10px;
+    margin-top: 10px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #2563eb;
+    background: #eff6ff;
+}
+
+#aiInsight {
+    padding: 11px;
+    margin-top: 8px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+}
+
+#aiInsight strong {
+    font-size: 13px;
+}
+
+#aiInsight p {
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+.ai-inputs {
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.ai-inputs p {
+    margin: 0;
+    padding: 8px;
+    background: #f8fafc;
+    border-radius: 6px;
+    font-size: 11px;
+}
+
+/* =========================================
+   INNOVATION SECTION
+   ========================================= */
+
+.innovation-section {
+    margin-bottom: 12px;
+    padding: 12px;
+    background: white;
+    border-radius: 9px;
+    border: 1px solid #e2e8f0;
+}
+
+.innovation-section h2 {
+    font-size: 16px;
+}
+
+.innovation-section > p {
+    font-size: 12px;
+    color: #64748b;
+    margin: 5px 0 10px;
+}
+
+.innovation-points {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.innovation-points > div {
+    padding: 9px;
+    background: #f8fafc;
+    border-radius: 7px;
+}
+
+.innovation-points h3 {
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.innovation-points p {
+    font-size: 10px;
+    color: #64748b;
+    line-height: 1.3;
+}
+
+/* =========================================
+   TRAFFIC INTELLIGENCE
+   ========================================= */
+
+.traffic-section {
+    margin-top: 16px;
+}
+
+.traffic-status {
+    padding: 8px 10px;
+    margin-top: 9px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #2563eb;
+    background: #eff6ff;
+}
+
+.traffic-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.traffic-card {
+    background: white;
+    padding: 12px;
+    border-radius: 9px;
+    border: 1px solid #e2e8f0;
+}
+
+.traffic-card h3 {
+    font-size: 13px;
+}
+
+.traffic-number {
+    font-size: 23px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.traffic-card p {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.vehicle-types,
+.congestion-box {
+    margin-top: 10px;
+    padding: 11px;
+    background: white;
+    border-radius: 9px;
+    border: 1px solid #e2e8f0;
+}
+
+.vehicle-types h3,
+.congestion-box h3 {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.vehicle-types p,
+.congestion-box p {
+    margin: 4px 0;
+    font-size: 11px;
+}
+
+/* =========================================
+   INFRASTRUCTURE
+   ========================================= */
+
+.infrastructure-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    margin-top: 10px;
+}
+
+.infrastructure-card {
+    background: white;
+    padding: 11px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.infrastructure-card h3 {
+    font-size: 12px;
+}
+
+.infrastructure-card p {
+    margin: 5px 0;
+    font-size: 11px;
+}
+
+.infrastructure-card small {
+    font-size: 9px;
+    color: #64748b;
+}
+
+.infrastructure-alert {
+    margin-top: 10px;
+    padding: 11px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #f59e0b;
+}
+
+.infrastructure-alert h3 {
+    font-size: 13px;
+}
+
+.infrastructure-alert p {
+    margin: 4px 0;
+    font-size: 11px;
+}
+
+/* =========================================
+   PEDESTRIAN & INCIDENT
+   ========================================= */
+
+.incident-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.incident-card {
+    background: white;
+    padding: 11px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.incident-card h3 {
+    font-size: 13px;
+}
+
+.incident-card p {
+    margin: 5px 0;
+    font-size: 11px;
+}
+
+.incident-card small {
+    font-size: 9px;
+    color: #64748b;
+}
+
+.hit-run-box {
+    margin-top: 10px;
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid #ef4444;
+}
+
+.hit-run-box h3 {
+    font-size: 13px;
+}
+
+.hit-run-box p {
+    margin: 4px 0;
+    font-size: 11px;
+}
+
+.incident-status {
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: bold;
+    border: 1px solid #ef4444;
+    background: #fef2f2;
+}
+
+/* =========================================
+   CENTRAL URBAN INTELLIGENCE
+   ========================================= */
+
+.central-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    margin-top: 10px;
+}
+
+.central-card {
+    background: white;
+    padding: 11px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.central-card h3 {
+    font-size: 12px;
+}
+
+.central-number {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.central-card p {
+    font-size: 10px;
+    color: #64748b;
+}
+
+.gis-box,
+.authority-insight-box {
+    margin-top: 10px;
+    padding: 11px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.gis-box h3,
+.authority-insight-box h3 {
+    font-size: 13px;
+}
+
+.gis-box p,
+.authority-insight-box p {
+    margin: 4px 0;
+    font-size: 11px;
+}
+
+/* =========================================
+   EDGE AI
+   ========================================= */
+
+.edge-flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    margin-top: 10px;
+}
+
+.edge-step {
+    background: white;
+    padding: 11px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.edge-step h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.edge-step p {
+    font-size: 10px;
+    line-height: 1.3;
+}
+
+.bandwidth-box {
+    margin-top: 10px;
+    padding: 11px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.bandwidth-box h3 {
+    font-size: 13px;
+}
+
+.bandwidth-box p {
+    margin: 4px 0;
+    font-size: 11px;
+}
+
+/* =========================================
+   SYSTEM ARCHITECTURE
+   ========================================= */
+
+.architecture-flow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.architecture-step {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    flex: 1;
+}
+
+.architecture-step h3 {
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.architecture-step p {
+    font-size: 9px;
+    line-height: 1.25;
+}
+
+.architecture-arrow {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* =========================================
+   DRIVER SAFETY
+   ========================================= */
+
+.alert-section {
+    margin-top: 16px;
+}
+
+#driverAlert {
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 8px;
+    background: white;
+    border: 2px solid #22c55e;
+    font-size: 12px;
+}
+
+#driverAlert p {
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+.alert-safe {
+    border-color: #22c55e !important;
+}
+
+.alert-warning {
+    border-color: #eab308 !important;
+}
+
+.alert-danger {
+    border-color: #f97316 !important;
+}
+
+.alert-critical {
+    border-color: #ef4444 !important;
+}
+
+/* =========================================
+   EMERGENCY
+   ========================================= */
+
+.emergency-section {
+    margin-top: 12px;
+}
+
+#emergencyStatusBadge {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 7px 0;
+    border-radius: 15px;
+    background: #dcfce7;
+    border: 1px solid #22c55e;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+#emergencyPanel {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    font-size: 12px;
+}
+
+#emergencyPanel p {
+    margin: 5px 0;
+    font-size: 11px;
+}
+
+/* =========================================
+   BUTTON
+   ========================================= */
+
+button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* =========================================
+   LIVING ROAD MAP
+   ========================================= */
+
+.map-section {
+    margin-top: 16px;
+}
+
+.map-section p {
+    margin-top: 3px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+#map {
+    height: 320px;
+    width: 100%;
+    border-radius: 9px;
+    margin-top: 10px;
+    overflow:hidden
+}
+
+/* =========================================
+   MAP ICONS
+   ========================================= */
+
+.hazard-icon,
+.accident-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #333;
+    font-size: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.accident-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
+    border: 3px solid #ef4444;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ai-inputs {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .innovation-points {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .infrastructure-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .central-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .edge-flow {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .architecture-flow {
+        flex-wrap: wrap;
+    }
+
+    .architecture-step {
+        min-width: 30%;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 10px 15px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .welcome h1 {
+        font-size: 23px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .authority-cards,
+    .traffic-cards,
+    .incident-cards,
+    .infrastructure-cards,
+    .central-cards,
+    .edge-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-inputs {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .innovation-points {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-flow {
+        display: block;
+    }
+
+    .architecture-step {
+        margin-bottom: 5px;
+    }
+
+    .architecture-arrow {
+        padding: 2px;
+    }
+
+    #map {
+        height: 280px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-inputs {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================
+   ARCHITECTURE SMALL BOX
+   ========================================= */
+
+.architecture-box-section {
+    margin-top: 16px;
+}
+
+.architecture-open-box {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 15px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.05);
+
+    transition: 0.2s;
+}
+
+.architecture-open-box:hover {
+    transform: translateY(-1px);
+    border-color: #2563eb;
+}
+
+.architecture-icon {
+    font-size: 22px;
+}
+
+.architecture-open-box h3 {
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.architecture-open-box p {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.architecture-arrow-small {
+    margin-left: auto;
+    font-size: 20px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+
+/* =========================================
+   ARCHITECTURE POPUP
+   ========================================= */
+
+.architecture-modal {
+    display: none;
+
+    position: fixed;
+    z-index: 2000;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(15, 23, 42, 0.65);
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.architecture-modal-content {
+    position: relative;
+
+    background: #f8fafc;
+
+    width: 90%;
+    max-width: 1100px;
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+.architecture-modal-content h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.architecture-modal-content > p {
+    font-size: 12px;
+    color: #64748b;
+}
+
+
+/* Close button */
+
+.architecture-close {
+    position: absolute;
+
+    right: 15px;
+    top: 15px;
+
+    width: 32px;
+    height: 32px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background: #ef4444;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.architecture-close:hover {
+    background: #dc2626;
+}
+
+
+/* Architecture flow inside popup */
+
+.architecture-modal .architecture-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+}
+
+.architecture-modal .architecture-step {
+    width: 90%;
+    max-width: 700px;
+
+    background: white;
+
+    padding: 14px;
+
+    border-radius: 9px;
+
+    border: 1px solid #e2e8f0;
+}
+
+.architecture-modal .architecture-step h3 {
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.architecture-modal .architecture-step p {
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.architecture-modal .architecture-arrow {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .architecture-modal-content {
+        width: 95%;
+        padding: 18px;
+    }
+
+    .architecture-modal .architecture-flow {
+        display: block;
+    }
+
+    .architecture-modal .architecture-step {
+        margin-bottom: 6px;
+    }
+
+    .architecture-modal .architecture-arrow {
+        text-align: center;
+        padding: 2px;
+    }
+}
+/* =========================================
+   PAGE NAVIGATION
+   ========================================= */
+
+.page-section {
+    display: block;
+}
+#dashboardPage{
+    display:block;
+}
